@@ -4,7 +4,9 @@ CoSort 10.0.1 R100200406-1510 x86_64 Copyright 1978,2020 IRI, Inc. www.iri.com
 2020-04-07 12:16:21 #99999.0000 8 CPU
 Expiration Date: 2022-12-31
 
-pattern "(\\w+) ([\\d.]+) ([A-Z][\\d-]+) (\\w+)"
+pattern for line 1: "(\\w+) ([\\d.]+) ([A-Z][\\d-]+) (\\w+) .*"
+pattern for line 2: "([\\d-]{10} [\\d:]{8}) #([\\w\\.]+) .*"
+pattern for line 3: ".*([\\d-]{10})"
 
 result:
 
@@ -12,5 +14,8 @@ result:
       "product":"CoSort",
       "version":"10.0.1",
       "tag":"R100200406-1510",
-      "arch":"x86_64"
+      "arch":"x86_64",
+      "serial":"99999.0000",
+      "expires":"2022-12-31",
+      "timestamp":"2020-04-08 11:55:42"
     }
