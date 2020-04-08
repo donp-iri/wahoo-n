@@ -7,7 +7,7 @@ For an example, run a curl commend from the *test* directory.
 
 The result will be the output of the script as scraped from stdout. This is a sample of two formatted records from the output :
 
-@@@
+```
 [
   {
     "FakeText": "bhqcx",
@@ -24,11 +24,11 @@ The result will be the output of the script as scraped from stdout. This is a sa
     }
   }
 ]
-@@@
+```
 
 The RowGen script, *10.rcl*, which produces the random records:
 
-@@@
+```
 /INFILE=random
     /PROCESS=RANDOM
     /INCOLLECT=10
@@ -43,4 +43,4 @@ The RowGen script, *10.rcl*, which produces the random records:
     /FIELD=(FAKETEXT, TYPE=ASCII, POSITION=1, SEPARATOR="\t", JDEF="FakeText")
     /FIELD=(FAKENUM1, TYPE=WHOLE, POSITION=2, SIZE=2, SEPARATOR="\t", JDEF="FakeNum.A")
     /FIELD=(FAKENUM2, TYPE=WHOLE, POSITION=3, SIZE=4, SEPARATOR="\t", JDEF="FakeNum.B")
-@@@
+```
