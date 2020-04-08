@@ -1,0 +1,20 @@
+{
+  "name": "wahoo-n",
+  "version": "0.5.1",
+  "description": "NodeJS web service for IRI RowGen.",
+  "main": "wahoo-n.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donp-iri/wahoo-n.git"
+  },
+
+  "author": "Don Purnhagen",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.17.1",
+    "tmp": "^0.1.0"
+  }
+}
