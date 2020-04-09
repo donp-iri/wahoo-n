@@ -77,8 +77,22 @@ app.get('/rc', function (req, res) {
             res.json({ error:err })
         } else {
             // stdout (buffered)
-            let capture = stderr
-            res.send(capture)
+            let arr = []
+            let lines = stderr.split("\n")
+            var i
+            for (i = 0; i < lines.length; ++i) {
+                if (i < 6) {
+                    continue
+                }
+                let val = lines[i].match("\\s*(\\w+)\\s+(\\w+)")
+                if (val != null && val.length == 3) {
+                    arr.push({
+                        setting:val[1],
+                        value:val[2]
+                    })
+                }
+            }
+            res.json(arr)
         }
     })
 })
@@ -115,4 +129,4 @@ app.get('/version', function (req, res) {
     })
 })
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+app.listen(port, () => console.log(`IRI RowGen web service at http://localhost:${port}`))
