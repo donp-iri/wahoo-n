@@ -13,21 +13,38 @@ const app = express()
 const bodyParser = require('body-parser')
 const tmp = require('tmp');
 const fs = require('fs');
-const { exec } = require('child_process')
+const process = require('child_process')
 
 const port = 3000
 
-// For parsing: application/json
-//app.use(express.json())
 // For parsing: application/x-www-form-urlencoded
 //app.use(express.urlencoded({ extended: true }))
 // For parsing: application/octet-stream
 //app.use(bodyParser.raw())
 
+// For parsing: application/json
+app.use(express.json())
+
 // For parsing: text/plain
 app.use(bodyParser.text())
 
 app.get('/', (req, res) => res.json({ ping:'pong' }))
+
+app.get('/rowgen/:scriptBat', function (req, res) {
+    var cmd = req.params.scriptBat
+    console.log(cmd)
+    process.exec(cmd, { cwd:"test\\flights" }, (err, stdout, stderr) => {
+        if (err) {
+            //some err occurred
+            console.error(err)
+            res.json({ error:err })
+        } else {
+            // stdout (buffered)
+            let capture = stdout
+            res.send(capture)
+        }
+    })
+})
 
 app.post('/script', function (req, res) {
     var tmpFile = tmp.fileSync({dir: './', postfix: '.scl'});
@@ -36,7 +53,7 @@ app.post('/script', function (req, res) {
     fs.closeSync(tmpFile.fd)
     var cmd = 'sortcl /SPECIFICATION=' + tmpFile.name
     console.log(cmd)
-    exec(cmd, (err, stdout, stderr) => {
+    process.exec(cmd, (err, stdout, stderr) => {
         if (err) {
             //some err occurred
             console.error(err)
@@ -54,7 +71,7 @@ app.post('/script', function (req, res) {
 app.post('/run', function (req, res) {
     var cmd = 'sortcl ' + req.body
     console.log(cmd)
-    exec(cmd, (err, stdout, stderr) => {
+    process.exec(cmd, (err, stdout, stderr) => {
         if (err) {
             //some err occurred
             console.error(err)
@@ -67,10 +84,40 @@ app.post('/run', function (req, res) {
     })
 })
 
+app.post('/cmd', function (req, res) {
+    var cmd = req.body.command
+    console.log(cmd)
+    var ret = req.body.return
+    console.log(ret)
+    process.exec(cmd, (err, stdout, stderr) => {
+        if (err) {
+            //some err occurred
+            console.error(err)
+            res.json({ error:err })
+        } else {
+            // stdout (buffered)
+            var capture
+            if (ret != undefined && ret != 'stdout') {
+                // Open and return the contents of ret.
+                try {
+                    let fh = fs.openSync(ret)
+
+                } catch (err2) {
+                    capture = 'Cannot open file: ' + ret
+                }
+                capture = "Open and return the contents."
+            } else {
+                capture = stdout
+            }
+            res.send(capture)
+        }
+    })
+})
+
 app.get('/rc', function (req, res) {
     var cmd = 'sortcl /RC'
     console.log(cmd)
-    exec(cmd, (err, stdout, stderr) => {
+    process.exec(cmd, (err, stdout, stderr) => {
         if (err) {
             //some err occurred
             console.error(err)
@@ -105,7 +152,7 @@ app.post('/loopback', function (req, res) {
 app.get('/version', function (req, res) {
     var cmd = 'sortcl /V'
     console.log(cmd)
-    exec(cmd, (err, stdout, stderr) => {
+    process.exec(cmd, (err, stdout, stderr) => {
         if (err) {
             //some err occurred
             console.error(err)
