@@ -30,16 +30,14 @@ app.use(bodyParser.text())
 
 app.get('/', (req, res) => res.json({ ping:'pong' }))
 
-app.get('/rowgen/:scriptBat', function (req, res) {
-    var cmd = req.params.scriptBat
+app.get('/rowgen/:cmd', function (req, res) {
+    let cmd = req.params.cmd
     console.log(cmd)
-    process.exec(cmd, { cwd:"test\\flights" }, (err, stdout, stderr) => {
+    process.exec(cmd, { cwd:"rowgen" }, (err, stdout, stderr) => {
         if (err) {
-            //some err occurred
             console.error(err)
             res.json({ error:err })
         } else {
-            // stdout (buffered)
             let capture = stdout
             res.send(capture)
         }
@@ -55,11 +53,9 @@ app.post('/script', function (req, res) {
     console.log(cmd)
     process.exec(cmd, (err, stdout, stderr) => {
         if (err) {
-            //some err occurred
             console.error(err)
             res.json({ error:err })
         } else {
-            // stdout (buffered)
             let capture = stdout
             res.send(capture)
         }
@@ -73,11 +69,9 @@ app.post('/run', function (req, res) {
     console.log(cmd)
     process.exec(cmd, (err, stdout, stderr) => {
         if (err) {
-            //some err occurred
             console.error(err)
             res.json({ error:err })
         } else {
-            // stdout (buffered)
             let capture = stdout
             res.send(capture)
         }
@@ -91,11 +85,9 @@ app.post('/cmd', function (req, res) {
     console.log(ret)
     process.exec(cmd, (err, stdout, stderr) => {
         if (err) {
-            //some err occurred
             console.error(err)
             res.json({ error:err })
         } else {
-            // stdout (buffered)
             var capture
             if (ret != undefined && ret != 'stdout') {
                 // Open and return the contents of ret.
@@ -119,11 +111,9 @@ app.get('/rc', function (req, res) {
     console.log(cmd)
     process.exec(cmd, (err, stdout, stderr) => {
         if (err) {
-            //some err occurred
             console.error(err)
             res.json({ error:err })
         } else {
-            // stdout (buffered)
             let arr = []
             let lines = stderr.split("\n")
             var i
@@ -154,11 +144,9 @@ app.get('/version', function (req, res) {
     console.log(cmd)
     process.exec(cmd, (err, stdout, stderr) => {
         if (err) {
-            //some err occurred
             console.error(err)
             res.json({ error:err })
         } else {
-            // stdout (buffered)
             let lines = stdout.split("\n")
             //console.log(lines)
             let val1 = lines[0].match("(\\w+) ([\\d.]+) ([A-Z][\\d-]+) (\\w+) .*")
