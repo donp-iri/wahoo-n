@@ -1,7 +1,7 @@
 # wahoo-n
 NodeJS web service for IRI RowGen.
 
-For an example, run a curl commend from the *test* directory.
+For an example, run a curl command from the *test* directory.
 
 `curl -s --data-binary @10.rcl -H "Content-Type: text/plain" http://localhost:3000/script`
 
