@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5f057b90-c580-4a43-936c-f8f4c1fef580",
+		"_postman_id": "e35815a7-2f0a-4595-aa83-d9e39e96bcc3",
 		"name": "wahoo-n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:3000/version",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"version"
+					]
 				}
 			},
 			"response": []
@@ -22,7 +30,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:3000/rc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rc"
+					]
 				}
 			},
 			"response": []
@@ -30,10 +46,22 @@
 		{
 			"name": "loopback",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Testing 1,2,3\n"
+				},
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:3000/loopback",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"loopback"
+					]
 				},
 				"description": "Echo back whatever is in the body of the request."
 			},
@@ -42,21 +70,22 @@
 		{
 			"name": "script execution",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "/INFILE=test/foo.txt\r\n    /PROCESS=DELIMITED\r\n    /FIELD=(KEYNAME, TYPE=ASCII, POSITION=1, SEPARATOR=\"\\t\", JDEF=\"KeyName\")\r\n\r\n/SORT\r\n\r\n/OUTFILE=stdout\r\n    /PROCESS=JSON\r\n    /FIELD=(KEYNAME, TYPE=ASCII, POSITION=1, SEPARATOR=\"\\t\", JDEF=\"KeyName\")\r\n"
+				},
 				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "run test",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
+					"raw": "http://localhost:3000/script",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"script"
+					]
 				}
 			},
 			"response": []
@@ -68,7 +97,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"command\": \"test\\\\test.cmd\", \"return\": \"test.zip\" }",
+					"raw": "{ \"command\": \"test/test.cmd\", \"return\": \"foo\" }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -94,7 +123,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:3000/rowgen/find-flight",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rowgen",
+						"find-flight"
+					]
 				}
 			},
 			"response": []
@@ -105,7 +143,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:3000/rowgen/generate-pnr",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rowgen",
+						"generate-pnr"
+					]
 				}
 			},
 			"response": []

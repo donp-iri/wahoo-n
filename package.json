@@ -10,7 +10,6 @@
     "type": "git",
     "url": "https://github.com/donp-iri/wahoo-n.git"
   },
-
   "author": "Don Purnhagen",
   "license": "UNLICENSED",
   "dependencies": {
