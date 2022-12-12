@@ -13,7 +13,7 @@
   "author": "Don Purnhagen",
   "license": "UNLICENSED",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "tmp": "^0.1.0"
   }
 }
